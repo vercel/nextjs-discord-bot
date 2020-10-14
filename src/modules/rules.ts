@@ -34,6 +34,14 @@ If you want to contribute to Next.js, look at the <#${CONTRIBUTORS_CHANNEL_ID}> 
 const handlers: Handlers = {
   onStartup: async (client) => {
     const channel = client.channels.cache.get(RULES_CHANNEL_ID) as TextChannel;
+
+    if (!channel) {
+      console.warn(
+        `No rules channel found (using the ID ${RULES_CHANNEL_ID}), skipping the rules module!`
+      );
+      return;
+    }
+
     const channelMessages = await channel.messages.fetch({ limit: 100 });
 
     // Filter only the messages from the bot
