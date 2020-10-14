@@ -85,7 +85,7 @@ const handlers: Handlers = {
 
       // And create them!
       await Promise.all(
-        remainingMessages.map(async (message) => await channel.send(message))
+        remainingMessages.map((message) => channel.send(message))
       );
     }
   },
