@@ -6,11 +6,12 @@
   "license": "MIT",
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "ts-node-dev --type-check src/index.ts",
+    "dev": "ts-node-dev src/index.ts",
     "build": "tsc"
   },
   "dependencies": {
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0"
   },
   "devDependencies": {
     "@types/node": "^14.11.8",
