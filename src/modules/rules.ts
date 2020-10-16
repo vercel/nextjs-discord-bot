@@ -11,7 +11,6 @@ import { Handlers } from '../types';
  */
 
 const RULES_CHANNEL_ID = '752553802359505020';
-const GENERAL_CHANNEL_ID = '752647196419031042';
 const HELP_CHANNEL_ID = '752668543891276009';
 
 const MODERATOR_ROLE_ID = '752637460550385834';
@@ -21,13 +20,15 @@ const RULES_MESSAGES = [
   `
 Welcome to the official Next.js Discord server!
 
+Join for Next.js Conf, stay for the Community!
+
+On October 27, this will be our primary place to make Next.js Conf announcements and gather questions for presenters' live Q&A. The best part about Discord is your freedom to join or begin conversations that lead to more knowledge, greater insight, or even a laugh!
+
 Please read our Code of Conduct. All of its contents are applied to this server: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
-If you see someone misbehaving, feel free to ping the <@&${MODERATOR_ROLE_ID}> role.
 
-You can engage with the community in the <#${GENERAL_CHANNEL_ID}> channel
-Looking for help? Check out the <#${HELP_CHANNEL_ID}> channel
+If you see someone misbehaving, ping the <@&${MODERATOR_ROLE_ID}> role.
 
-If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
+Looking for help? Check out the <#${HELP_CHANNEL_ID}> channel. If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
   `,
 ];
 
