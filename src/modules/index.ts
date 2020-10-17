@@ -1,13 +1,22 @@
-import rulesModule from './rules';
+import { Client, MessageReaction, User } from 'discord.js';
 import { Handlers } from '../types';
-import { Client } from 'discord.js';
+import rulesModule from './rules';
+import alertMessageModule from './alertReactions';
 
 const modules: Handlers[] = [];
 modules.push(rulesModule);
+modules.push(alertMessageModule);
 
 const actions = {
-  startup: (client: Client): void => {
+  onStartup: (client: Client): void => {
     modules.forEach((module) => module.onStartup?.(client));
+  },
+  onReactionAdd: (
+    client: Client,
+    reaction: MessageReaction,
+    user: User
+  ): void => {
+    modules.forEach((module) => module.onReactionAdd?.(client, reaction, user));
   },
 };
 
