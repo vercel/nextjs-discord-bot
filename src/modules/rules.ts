@@ -11,7 +11,6 @@ import { Handlers } from '../types';
  */
 
 const RULES_CHANNEL_ID = '752553802359505020';
-const HELP_CHANNEL_ID = '752668543891276009';
 
 const MODERATOR_ROLE_ID = '752637460550385834';
 
@@ -28,7 +27,9 @@ Please read our Code of Conduct. All of its contents are applied to this server:
 
 If you see someone misbehaving, ping the <@&${MODERATOR_ROLE_ID}> role.
 
-Looking for help? Check out the <#${HELP_CHANNEL_ID}> channel. If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
+If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
+
+Type \`/nick\` to change your nickname on this server.
   `,
 ];
 
