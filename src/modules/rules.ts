@@ -15,7 +15,7 @@ const RULES_CHANNEL_ID = '752553802359505020';
 const MODERATOR_ROLE_ID = '752637460550385834';
 
 const RULES_MESSAGES = [
-  'https://cdn.discordapp.com/attachments/752553802359505020/752668994078769192/nextjs.png',
+  'https://i.imgur.com/Zqc3Nc6.png',
   `
 Welcome to the official Next.js Discord server!
 
