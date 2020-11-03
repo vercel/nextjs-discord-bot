@@ -13,3 +13,9 @@ DISCORD_BOT_TOKEN=<token>
 > You can get the token in the bot settings inside the Discord Developer Portal
 
 Then run the bot with `yarn dev`.
+
+## Removed modules
+
+Archive of modules that were removed (for future reference)
+
+- Countdown module (Next.js conf): https://github.com/rafaelalmeidatk/nextjs-discord-bot/blob/10769e18accd756e1759db83b96e8a19d196a35b/src/modules/countdown.ts
