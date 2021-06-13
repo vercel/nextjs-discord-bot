@@ -21,7 +21,7 @@ Welcome to the official Next.js Discord server!
 
 Join for Next.js Conf, stay for the Community!
 
-On October 27, this will be our primary place to make Next.js Conf announcements and gather questions for presenters' live Q&A. The best part about Discord is your freedom to join or begin conversations that lead to more knowledge, greater insight, or even a laugh!
+This is our primary place to make Next.js Conf announcements and gather questions for presenters' live Q&A. The best part about Discord is your freedom to join or begin conversations that lead to more knowledge, greater insight, or even a laugh!
 
 Please read our Code of Conduct. All of its contents are applied to this server: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
 
