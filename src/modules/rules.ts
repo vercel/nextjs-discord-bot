@@ -11,7 +11,7 @@ import { Handlers } from '../types';
  */
 
 const RULES_CHANNEL_ID = '752553802359505020';
-
+const HELP_CHANNEL_ID = '752668543891276009';
 const MODERATOR_ROLE_ID = '752637460550385834';
 
 const RULES_MESSAGES = [
@@ -25,11 +25,13 @@ This is our primary place to make Next.js Conf announcements and gather question
 
 Please read our Code of Conduct. All of its contents are applied to this server: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
 
-If you see someone misbehaving, ping the <@&${MODERATOR_ROLE_ID}> role.
+Looking for help? Feel free to ask on <#${HELP_CHANNEL_ID}>
+
+If you see someone misbehaving, ping the <@&${MODERATOR_ROLE_ID}> role
 
 If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
 
-Type \`/nick\` to change your nickname on this server.
+Type \`/nick\` to change your nickname on this server
   `,
 ];
 
