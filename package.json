@@ -11,8 +11,8 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "discord.js": "^12.3.1",
-    "dotenv": "^8.2.0"
+    "discord.js": "^13.2.0",
+    "dotenv": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.11.1",

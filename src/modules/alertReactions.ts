@@ -1,5 +1,4 @@
-import { TextChannel } from 'discord.js';
-import { Handlers } from '../types';
+import { Client, MessageReaction, TextChannel } from 'discord.js';
 import { isStaff } from '../utils';
 
 /**
@@ -18,52 +17,57 @@ let isEnabled = false;
 // for the same message if someone reacts, remove the reaction and add it again
 const warnedMessageIds: string[] = [];
 
-const handlers: Handlers = {
-  onStartup: async (client) => {
-    if (!client.channels.cache.get(MOD_LOG_CHANNEL_ID)) {
-      console.warn(
-        `No mod-log channel found (using the ID ${MOD_LOG_CHANNEL_ID}), skipping the Alert Reactions module!`
-      );
-
-      return;
-    }
-
-    isEnabled = true;
-  },
-  onReactionAdd: async (client, reaction) => {
-    if (!isEnabled || reaction.emoji.toString() !== TRIGGER_EMOJI) return;
-
-    const { message } = reaction;
-    if (
-      !message.guild ||
-      message.author.id === client.user?.id ||
-      warnedMessageIds.includes(message.id)
-    ) {
-      return;
-    }
-
-    const messageAuthor = message.guild.member(message.author.id);
-    if (!messageAuthor || isStaff(messageAuthor)) return;
-
-    await reaction.users.fetch();
-
-    const usersWhoReacted = reaction.users.cache.map((user) =>
-      message.guild?.member(user.id)
+export const onStartup = async (client: Client) => {
+  if (!client.channels.cache.get(MOD_LOG_CHANNEL_ID)) {
+    console.warn(
+      `No mod-log channel found (using the ID ${MOD_LOG_CHANNEL_ID}), skipping the Alert Reactions module!`
     );
 
-    const staffWhoReacted = usersWhoReacted.filter((user) => isStaff(user));
+    return;
+  }
 
-    // We want to trigger the warning only for staff members but not more than once,
-    // this could happen if the bot is restarted (losing the memory cache) and some other staff
-    // add a reaction to the message
-    if (staffWhoReacted.length !== 1) return;
+  isEnabled = true;
+};
 
-    const modLogChannel = client.channels.cache.get(
-      MOD_LOG_CHANNEL_ID
-    ) as TextChannel;
+export const onReactionAdd = async (
+  client: Client,
+  reaction: MessageReaction
+) => {
+  if (!isEnabled || reaction.emoji.toString() !== TRIGGER_EMOJI) return;
 
-    modLogChannel.send('', {
-      embed: {
+  const { message } = reaction;
+  if (
+    !message.guild ||
+    !message.author ||
+    message.author.id === client.user?.id ||
+    warnedMessageIds.includes(message.id)
+  ) {
+    return;
+  }
+
+  const messageAuthor = await message.guild.members.fetch(message.author.id);
+  if (!messageAuthor || isStaff(messageAuthor)) return;
+
+  await reaction.users.fetch();
+
+  const membersWhoReacted = await Promise.all(
+    reaction.users.cache.map((user) => message.guild?.members.fetch(user.id))
+  );
+
+  const staffWhoReacted = membersWhoReacted.filter((user) => isStaff(user));
+
+  // We want to trigger the warning only for staff members but not more than once,
+  // this could happen if the bot is restarted (losing the memory cache) and some other staff
+  // add a reaction to the message
+  if (staffWhoReacted.length !== 1) return;
+
+  const modLogChannel = client.channels.cache.get(
+    MOD_LOG_CHANNEL_ID
+  ) as TextChannel;
+
+  modLogChannel.send({
+    embeds: [
+      {
         title: '⚠️ Message Warned',
         description: '```' + message.content + '```',
         color: 16098851,
@@ -88,10 +92,8 @@ const handlers: Handlers = {
           text: `Warned by ${staffWhoReacted[0]?.displayName}`,
         },
       },
-    });
+    ],
+  });
 
-    warnedMessageIds.push(message.id);
-  },
+  warnedMessageIds.push(message.id);
 };
-
-export default handlers;

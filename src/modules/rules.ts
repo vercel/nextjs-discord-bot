@@ -1,5 +1,4 @@
-import { TextChannel } from 'discord.js';
-import { Handlers } from '../types';
+import { Client, TextChannel } from 'discord.js';
 
 /**
  * Rules module
@@ -35,64 +34,60 @@ Type \`/nick\` to change your nickname on this server
   `,
 ];
 
-const handlers: Handlers = {
-  onStartup: async (client) => {
-    const channel = client.channels.cache.get(RULES_CHANNEL_ID) as TextChannel;
+export const onStartup = async (client: Client) => {
+  const channel = client.channels.cache.get(RULES_CHANNEL_ID) as TextChannel;
 
-    if (!channel) {
-      console.warn(
-        `No rules channel found (using the ID ${RULES_CHANNEL_ID}), skipping the rules module!`
-      );
-      return;
+  if (!channel) {
+    console.warn(
+      `No rules channel found (using the ID ${RULES_CHANNEL_ID}), skipping the rules module!`
+    );
+    return;
+  }
+
+  const channelMessages = await channel.messages.fetch({ limit: 100 });
+
+  // Filter only the messages from the bot
+  const channelMessagesFromBot = channelMessages.filter(
+    (m) => m.author.id === client.user?.id
+  );
+
+  // Sort the messages from oldest to newest (so they match the same order of the rules)
+  const channelMessagesReversed = [
+    ...channelMessagesFromBot.values(),
+  ].reverse();
+
+  // For each message sent in the channel...
+  for (let i = 0; i < channelMessagesReversed.length; i++) {
+    const message = channelMessagesReversed[i];
+
+    // We first check if there is no rule message matching this position,
+    // this means that we have more messages in the channel than in our rules, so
+    // we need to delete this message (and this is going to be true to all the next messages)
+    if (!RULES_MESSAGES[i]) {
+      await message.delete();
+      continue;
     }
 
-    const channelMessages = await channel.messages.fetch({ limit: 100 });
+    // If the content of the message doesn't match the respective message in the rules, edit it
+    if (message.content !== RULES_MESSAGES[i]) {
+      await message.edit(RULES_MESSAGES[i]);
+    }
+  }
 
-    // Filter only the messages from the bot
-    const channelMessagesFromBot = channelMessages.filter(
-      (m) => m.author.id === client.user?.id
+  // And in the end, check if there are more messages in the rules than in the channel,
+  // this means that we didn't have enough messages to edit so we need to create more
+  const messagesLeftToCreate =
+    RULES_MESSAGES.length - channelMessagesReversed.length;
+
+  if (messagesLeftToCreate > 0) {
+    // Grab the last n messages from the rules...
+    const remainingMessages = RULES_MESSAGES.slice(
+      Math.max(RULES_MESSAGES.length - messagesLeftToCreate, 0)
     );
 
-    // Sort the messages from oldest to newest (so they match the same order of the rules)
-    const channelMessagesReversed = [
-      ...channelMessagesFromBot.values(),
-    ].reverse();
-
-    // For each message sent in the channel...
-    for (let i = 0; i < channelMessagesReversed.length; i++) {
-      const message = channelMessagesReversed[i];
-
-      // We first check if there is no rule message matching this position,
-      // this means that we have more messages in the channel than in our rules, so
-      // we need to delete this message (and this is going to be true to all the next messages)
-      if (!RULES_MESSAGES[i]) {
-        await message.delete();
-        continue;
-      }
-
-      // If the content of the message doesn't match the respective message in the rules, edit it
-      if (message.content !== RULES_MESSAGES[i]) {
-        await message.edit(RULES_MESSAGES[i]);
-      }
-    }
-
-    // And in the end, check if there are more messages in the rules than in the channel,
-    // this means that we didn't have enough messages to edit so we need to create more
-    const messagesLeftToCreate =
-      RULES_MESSAGES.length - channelMessagesReversed.length;
-
-    if (messagesLeftToCreate > 0) {
-      // Grab the last n messages from the rules...
-      const remainingMessages = RULES_MESSAGES.slice(
-        Math.max(RULES_MESSAGES.length - messagesLeftToCreate, 0)
-      );
-
-      // And create them!
-      await Promise.all(
-        remainingMessages.map((message) => channel.send(message))
-      );
-    }
-  },
+    // And create them!
+    await Promise.all(
+      remainingMessages.map((message) => channel.send(message))
+    );
+  }
 };
-
-export default handlers;
