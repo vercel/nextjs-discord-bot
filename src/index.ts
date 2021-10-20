@@ -1,22 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-import discord, { Client, Intents, MessageReaction, User } from 'discord.js';
+import discord, { Intents, User } from 'discord.js';
+import { ModuleFile } from './types';
 
 dotenv.config();
 
 if (!process.env.DISCORD_BOT_TOKEN) {
   throw new Error('No bot token found!');
 }
-
-type ModuleFile = {
-  onStartup?: (client: Client) => Promise<void>;
-  onReactionAdd?: (
-    client: Client,
-    reaction: MessageReaction,
-    user: User
-  ) => Promise<void>;
-};
 
 const client = new discord.Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],

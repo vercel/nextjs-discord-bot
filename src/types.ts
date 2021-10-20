@@ -1,10 +1,13 @@
 import { Client, MessageReaction, User } from 'discord.js';
 
-export type Handlers = {
-  onStartup?: (client: Client) => Promise<void>;
-  onReactionAdd?: (
-    client: Client,
-    reaction: MessageReaction,
-    user: User
-  ) => Promise<void>;
+export type OnStartupHandler = (client: Client) => Promise<void>;
+export type OnReactionAddHandler = (
+  client: Client,
+  reaction: MessageReaction,
+  user: User
+) => Promise<void>;
+
+export type ModuleFile = {
+  onStartup?: OnStartupHandler;
+  onReactionAdd?: OnReactionAddHandler;
 };

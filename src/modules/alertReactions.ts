@@ -1,4 +1,5 @@
-import { Client, MessageReaction, TextChannel } from 'discord.js';
+import { TextChannel } from 'discord.js';
+import { OnReactionAddHandler, OnStartupHandler } from '../types';
 import { isStaff } from '../utils';
 
 /**
@@ -17,7 +18,7 @@ let isEnabled = false;
 // for the same message if someone reacts, remove the reaction and add it again
 const warnedMessageIds: string[] = [];
 
-export const onStartup = async (client: Client) => {
+export const onStartup: OnStartupHandler = async (client) => {
   if (!client.channels.cache.get(MOD_LOG_CHANNEL_ID)) {
     console.warn(
       `No mod-log channel found (using the ID ${MOD_LOG_CHANNEL_ID}), skipping the Alert Reactions module!`
@@ -29,10 +30,7 @@ export const onStartup = async (client: Client) => {
   isEnabled = true;
 };
 
-export const onReactionAdd = async (
-  client: Client,
-  reaction: MessageReaction
-) => {
+export const onReactionAdd: OnReactionAddHandler = async (client, reaction) => {
   if (!isEnabled || reaction.emoji.toString() !== TRIGGER_EMOJI) return;
 
   const { message } = reaction;

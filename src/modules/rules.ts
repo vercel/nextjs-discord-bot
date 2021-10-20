@@ -1,4 +1,5 @@
-import { Client, TextChannel } from 'discord.js';
+import { TextChannel } from 'discord.js';
+import { OnStartupHandler } from '../types';
 
 /**
  * Rules module
@@ -34,7 +35,7 @@ Type \`/nick\` to change your nickname on this server
   `,
 ];
 
-export const onStartup = async (client: Client) => {
+export const onStartup: OnStartupHandler = async (client) => {
   const channel = client.channels.cache.get(RULES_CHANNEL_ID) as TextChannel;
 
   if (!channel) {
