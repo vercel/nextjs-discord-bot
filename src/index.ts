@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import discord, { Intents, User } from 'discord.js';
-import { ModuleFile } from './types';
+import { FeatureFile } from './types';
 
 dotenv.config();
 
@@ -11,24 +11,34 @@ if (!process.env.DISCORD_BOT_TOKEN) {
 }
 
 const client = new discord.Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+  intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+  ],
   partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
 
-const modules: ModuleFile[] = [];
-const moduleFiles = fs
-  .readdirSync(path.resolve(__dirname, './modules'))
+const features: FeatureFile[] = [];
+const featureFiles = fs
+  .readdirSync(path.resolve(__dirname, './features'))
   .filter((file) => file.endsWith('.ts'));
 
-for (const moduleFile of moduleFiles) {
+for (const featureFile of featureFiles) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const module = require(`./modules/${moduleFile}`) as ModuleFile;
-  modules.push(module);
+  const feature = require(`./features/${featureFile}`) as FeatureFile;
+  features.push(feature);
 }
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`);
-  modules.forEach((mod) => mod.onStartup?.(client));
+  features.forEach((f) => f.onStartup?.(client));
+});
+
+client.on('messageCreate', (message) => {
+  if (message.author.bot) return;
+
+  features.forEach((f) => f.onMessage?.(client, message));
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
@@ -51,16 +61,14 @@ client.on('messageReactionAdd', async (reaction, user) => {
   if (reaction.partial) {
     try {
       const fetchedReaction = await reaction.fetch();
-      modules.forEach((mod) =>
-        mod.onReactionAdd?.(client, fetchedReaction, user as User)
+      features.forEach((f) =>
+        f.onReactionAdd?.(client, fetchedReaction, user as User)
       );
     } catch (error) {
       console.log('Error while trying to fetch a reaction', error);
     }
   } else {
-    modules.forEach((mod) =>
-      mod.onReactionAdd?.(client, reaction, user as User)
-    );
+    features.forEach((f) => f.onReactionAdd?.(client, reaction, user as User));
   }
 });
 
