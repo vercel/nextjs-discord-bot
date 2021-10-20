@@ -10,7 +10,7 @@ import { OnStartupHandler } from '../types';
  * the existing messages to avoid creating pings in the channel.
  */
 
-const RULES_CHANNEL_ID = '752553802359505020';
+const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 const HELP_CHANNEL_ID = '752668543891276009';
 const MODERATOR_ROLE_ID = '752637460550385834';
 

@@ -9,7 +9,8 @@ import { isStaff } from '../utils';
  * the mod log channel
  */
 
-const MOD_LOG_CHANNEL_ID = '763149438951882792';
+const MOD_LOG_CHANNEL_ID =
+  process.env.MOD_LOG_CHANNEL_ID ?? '763149438951882792';
 const TRIGGER_EMOJI = '⚠️';
 
 let isEnabled = false;

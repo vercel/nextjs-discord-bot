@@ -4,11 +4,13 @@ Source code of the Discord bot of the Next.js server (https://nextjs.org/discord
 
 ## Running locally
 
-To run the bot locally, create a `.env` file with the following contents:
+To run the bot locally, copy the `.env.example` file with the `.env` name:
 
 ```
-DISCORD_BOT_TOKEN=<token>
+cp .env.example .env
 ```
+
+And edit the contents of the file as needed. The only required variable is the bot token.
 
 > You can get the token in the bot settings inside the Discord Developer Portal
 
