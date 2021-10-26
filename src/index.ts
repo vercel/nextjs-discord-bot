@@ -22,7 +22,8 @@ const client = new discord.Client({
 const features: FeatureFile[] = [];
 const featureFiles = fs
   .readdirSync(path.resolve(__dirname, './features'))
-  .filter((file) => file.endsWith('.ts'));
+  // Look for files as TS (dev) or JS (built files)
+  .filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
 
 for (const featureFile of featureFiles) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
