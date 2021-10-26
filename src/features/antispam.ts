@@ -1,5 +1,5 @@
 import { OnMessageHandler } from '../types';
-import { logAndDelete } from '../utils';
+import { isStaff, logAndDelete } from '../utils';
 
 /**
  * Anti spam
@@ -8,6 +8,7 @@ import { logAndDelete } from '../utils';
  */
 
 const MAX_EMOJI_COUNT = 8; // Flags are two symbols so 8 max emojis = max of 4 flags
+const ROLES_WHITELIST = ['partner']; // Allow partners to go above the emojis limit
 
 const emojiRegex = /\p{Emoji_Presentation}/gu;
 const spamKeywords = ['discord', 'nitro', 'steam', 'free', 'gift'];
@@ -16,6 +17,17 @@ const dmMessage =
   'Hello there! Our automated systems detected your message as a spam message and it has been deleted. If this is an error on our side, please feel free to contact one of the moderators.';
 
 export const onMessage: OnMessageHandler = async (client, message) => {
+  const messageAuthor = await message.guild?.members.fetch(message.author.id);
+
+  if (
+    !messageAuthor ||
+    isStaff(messageAuthor) ||
+    messageAuthor.roles.cache.some((role) =>
+      ROLES_WHITELIST.includes(role.name.toLowerCase())
+    )
+  )
+    return;
+
   const emojisCount = message.content.match(emojiRegex)?.length ?? 0;
 
   if (emojisCount > MAX_EMOJI_COUNT) {
