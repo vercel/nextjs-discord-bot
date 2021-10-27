@@ -12,9 +12,11 @@ const TITLE_VOICE_CHANNEL_ID = '902455952048029696';
 const COUNTDOWN_VOICE_CHANNEL_ID = '902456113298022420';
 const TARGET_TIME = '26 Oct 2021 09:00:00 GMT-0700';
 
-let enabled = true;
+let enabled = false;
 
 export const onStartup: OnStartupHandler = async (client) => {
+  if (!enabled) return;
+
   const voiceChannel = client.channels.cache.get(
     COUNTDOWN_VOICE_CHANNEL_ID
   ) as VoiceChannel;
