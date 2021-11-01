@@ -39,6 +39,11 @@ export const logAndDelete = async (
             value: reason,
             inline: true,
           },
+          {
+            name: 'Channel',
+            value: `<#${message.channel.id}>`,
+            inline: true,
+          },
         ],
       },
     ],
