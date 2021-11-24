@@ -10,28 +10,29 @@ import { OnStartupHandler } from '../types';
  */
 
 const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
-const HELP_CHANNEL_ID = '752668543891276009';
-const OFFTOPIC_CHANNEL_ID = '766433464055496744';
-const SHOWCASE_CHANNEL_ID = '771729272074534922';
-const KUDOS_CHANNEL_ID = '911305422307225682';
-const GENERAL_CHANNEL_ID = '752647196419031042';
+// const HELP_CHANNEL_ID = '752668543891276009';
+// const OFFTOPIC_CHANNEL_ID = '766433464055496744';
+// const SHOWCASE_CHANNEL_ID = '771729272074534922';
+// const KUDOS_CHANNEL_ID = '911305422307225682';
+// const GENERAL_CHANNEL_ID = '752647196419031042';
+
+// 'https://i.imgur.com/Zqc3Nc6.png',
+// `
+// Welcome to the official Next.js Discord server!
+
+// This is the place to chat about Next.js, ask questions, show off your projects, and collaborate with other developers.
+
+// **Here's a quick breakdown of our channels:**
+// <#${GENERAL_CHANNEL_ID}>:: General chat about Next.js
+// <#${HELP_CHANNEL_ID}>: Ask for help with Next.js
+// <#${OFFTOPIC_CHANNEL_ID}>: Anything else you want to talk about
+// <#${SHOWCASE_CHANNEL_ID}>: Show off your Next.js projects
+// <#${KUDOS_CHANNEL_ID}>: Shout out people who helped you out
+
+// We abide by our Code of Conduct. Please read it: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
+// `,
 
 const RULES_MESSAGES = [
-  'https://i.imgur.com/Zqc3Nc6.png',
-  `
-Welcome to the official Next.js Discord server!
-
-This is the place to chat about Next.js, ask questions, show off your projects, and collaborate with other developers.
-
-**Here's a quick breakdown of our channels:**
-<#${GENERAL_CHANNEL_ID}>:: General chat about Next.js
-<#${HELP_CHANNEL_ID}>: Ask for help with Next.js
-<#${OFFTOPIC_CHANNEL_ID}>: Anything else you want to talk about
-<#${SHOWCASE_CHANNEL_ID}>: Show off your Next.js projects
-<#${KUDOS_CHANNEL_ID}>: Shout out people who helped you out
-
-We abide by our Code of Conduct. Please read it: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
-  `,
   `**Tell us what tools you use** so we can add you to the relevant channels!
 
   <:javascript:770004227366846494> : JavaScript
