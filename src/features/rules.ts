@@ -11,11 +11,10 @@ import { OnStartupHandler } from '../types';
 
 const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 const HELP_CHANNEL_ID = '752668543891276009';
-// TODO: Fix these channel IDs
-const OFFTOPIC_CHANNEL_ID = '752668543891276009';
-const SHOWCASE_CHANNEL_ID = '752668543891276009';
-const KUDOS_CHANNEL_ID = '752668543891276009';
-const GENERAL_CHANNEL_ID = '752668543891276009';
+const OFFTOPIC_CHANNEL_ID = '766433464055496744';
+const SHOWCASE_CHANNEL_ID = '771729272074534922';
+const KUDOS_CHANNEL_ID = '911305422307225682';
+const GENERAL_CHANNEL_ID = '752647196419031042';
 
 const RULES_MESSAGES = [
   'https://i.imgur.com/Zqc3Nc6.png',
@@ -35,13 +34,13 @@ We abide by our Code of Conduct. Please read it: <https://github.com/vercel/next
   `,
   `**Tell us what tools you use** so we can add you to the relevant channels!
 
-  <:javascript:912770918659543090> : JavaScript
+  <:javascript:770004227366846494> : JavaScript
 
-  <:typescript:912771149853786204> : TypeScript
+  <:typescript:770004243545325580> : TypeScript
 
-  <:tailwind:912770959096811550> : Tailwind
+  <:tailwind:913088128468787210> : Tailwind
 
-  <:rust:912770947562471465> : Rust
+  <:rust:913088096692748349> : Rust
   `,
 ];
 

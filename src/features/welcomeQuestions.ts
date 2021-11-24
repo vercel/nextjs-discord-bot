@@ -12,10 +12,10 @@ type LanguageObject = {
 };
 
 const LANGUAGES: LanguageObject = {
-  javascript: '912748578907242516',
-  typescript: '912748650860539965',
-  tailwind: '912748812731301958',
-  rust: '912748739284844614',
+  javascript: '913086422351769610',
+  typescript: '913086489229918238',
+  tailwind: '913086567042674719',
+  rust: '913086533387567165',
 };
 
 // Make sure to update this message ID when bot generates a new one
