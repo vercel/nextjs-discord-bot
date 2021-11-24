@@ -19,7 +19,7 @@ const LANGUAGES: LanguageObject = {
 };
 
 // Make sure to update this message ID when bot generates a new one
-const LANGUAGES_MESSAGE_ID = '913092689052958751';
+const LANGUAGES_MESSAGE_ID = '913092687924695071';
 
 export const onReactionAdd: OnReactionAddHandler = async (
   client,
