@@ -33,7 +33,7 @@ const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 // `,
 
 const RULES_MESSAGES = [
-  `**Tell us what tools you use** so we can add you to the relevant channels!
+  `**Tell us what tools you use** so we can automatically add you to the relevant channels!
 
   <:javascript:770004227366846494> : JavaScript
 
