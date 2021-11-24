@@ -35,6 +35,8 @@ const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 const RULES_MESSAGES = [
   `**Tell us what tools you use** so we can add you to the relevant channels!
 
+  Note: NOT working yet! Troubleshooting right now, please hold off on emojis until we annouce this works!
+
   <:javascript:770004227366846494> : JavaScript
 
   <:typescript:770004243545325580> : TypeScript
