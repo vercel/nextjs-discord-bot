@@ -1,6 +1,5 @@
 import { TextChannel } from 'discord.js';
 import { OnStartupHandler } from '../types';
-
 /**
  * Rules module
  * ---
@@ -11,27 +10,38 @@ import { OnStartupHandler } from '../types';
  */
 
 const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
-const HELP_CHANNEL_ID = '752668543891276009';
-const MODERATOR_ROLE_ID = '752637460550385834';
+// const HELP_CHANNEL_ID = '752668543891276009';
+// const OFFTOPIC_CHANNEL_ID = '766433464055496744';
+// const SHOWCASE_CHANNEL_ID = '771729272074534922';
+// const KUDOS_CHANNEL_ID = '911305422307225682';
+// const GENERAL_CHANNEL_ID = '752647196419031042';
+
+// 'https://i.imgur.com/Zqc3Nc6.png',
+// `
+// Welcome to the official Next.js Discord server!
+
+// This is the place to chat about Next.js, ask questions, show off your projects, and collaborate with other developers.
+
+// **Here's a quick breakdown of our channels:**
+// <#${GENERAL_CHANNEL_ID}>:: General chat about Next.js
+// <#${HELP_CHANNEL_ID}>: Ask for help with Next.js
+// <#${OFFTOPIC_CHANNEL_ID}>: Anything else you want to talk about
+// <#${SHOWCASE_CHANNEL_ID}>: Show off your Next.js projects
+// <#${KUDOS_CHANNEL_ID}>: Shout out people who helped you out
+
+// We abide by our Code of Conduct. Please read it: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
+// `,
 
 const RULES_MESSAGES = [
-  'https://i.imgur.com/Zqc3Nc6.png',
-  `
-Welcome to the official Next.js Discord server!
+  `**Tell us what tools you use** so we can automatically add you to the relevant channels!
 
-Join for Next.js Conf, stay for the Community!
+  <:javascript:770004227366846494> : JavaScript
 
-This is our primary place to make Next.js Conf announcements and gather questions for presenters' live Q&A. The best part about Discord is your freedom to join or begin conversations that lead to more knowledge, greater insight, or even a laugh!
+  <:typescript:770004243545325580> : TypeScript
 
-Please read our Code of Conduct. All of its contents are applied to this server: <https://github.com/vercel/next.js/blob/canary/CODE_OF_CONDUCT.md>
+  <:tailwind:913088128468787210> : Tailwind
 
-Looking for help? Feel free to ask on <#${HELP_CHANNEL_ID}>
-
-If you see someone misbehaving, ping the <@&${MODERATOR_ROLE_ID}> role
-
-If you want to contribute to Next.js, please read our contributing guide: <https://github.com/vercel/next.js/blob/canary/contributing.md>
-
-Type \`/nick\` to change your nickname on this server
+  <:rust:913088096692748349> : Rust
   `,
 ];
 
