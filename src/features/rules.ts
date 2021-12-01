@@ -42,6 +42,8 @@ const RULES_MESSAGES = [
   <:tailwind:913088128468787210> : Tailwind
 
   <:rust:913088096692748349> : Rust
+
+  <:swr:770004547422650388> : SWR
   `,
 ];
 
