@@ -6,6 +6,9 @@ import { FeatureFile } from './types';
 
 dotenv.config();
 
+const INTRO_CHANNEL_ID = '766393115044216854';
+const VERIFIED_ROLE = '930202099264938084'
+
 if (!process.env.DISCORD_BOT_TOKEN) {
   throw new Error('No bot token found!');
 }
@@ -38,6 +41,13 @@ client.on('ready', () => {
 
 client.on('messageCreate', (message) => {
   if (message.author.bot) return;
+
+  // if user types into the intros channel, give them the verified role
+  if (message.channel.id == INTRO_CHANNEL_ID) {
+      message.member?.roles
+      .add(VERIFIED_ROLE)
+      .catch((err) => console.log(err.message, "Verify"));
+  }
 
   features.forEach((f) => f.onMessage?.(client, message));
 });
