@@ -10,6 +10,7 @@ import { OnStartupHandler } from '../types';
  */
 
 const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
+const INTRO_CHANNEL_ID = '766393115044216854';
 // const HELP_CHANNEL_ID = '752668543891276009';
 // const OFFTOPIC_CHANNEL_ID = '766433464055496744';
 // const SHOWCASE_CHANNEL_ID = '771729272074534922';
@@ -33,17 +34,19 @@ const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 // `,
 
 const RULES_MESSAGES = [
-  `**Tell us what tools you use** so we can automatically add you to the relevant channels!
+  `**To unlock the rest of the server, make sure to introduce yourself in the <#${INTRO_CHANNEL_ID}> channel!**
 
-  <:javascript:770004227366846494> : JavaScript
+Also, tell us what tools you use so we can automatically add you to the relevant channels!
 
-  <:typescript:770004243545325580> : TypeScript
+<:javascript:770004227366846494> : JavaScript
 
-  <:tailwind:913088128468787210> : Tailwind
+<:typescript:770004243545325580> : TypeScript
 
-  <:rust:913088096692748349> : Rust
+<:tailwind:913088128468787210> : Tailwind
 
-  <:swr:770004547422650388> : SWR
+<:rust:913088096692748349> : Rust
+
+<:swr:770004547422650388> : SWR
   `,
 ];
 
