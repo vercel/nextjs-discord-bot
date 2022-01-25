@@ -34,7 +34,12 @@ const INTRO_CHANNEL_ID = '766393115044216854';
 // `,
 
 const RULES_MESSAGES = [
-  `**To unlock the rest of the server, make sure to introduce yourself in the <#${INTRO_CHANNEL_ID}> channel!**
+  `**To unlock the rest of the server, make sure to introduce yourself in the <#${INTRO_CHANNEL_ID}> channel!** Use this template:
+
+🌎 I'm from: Italy
+🏢 I work at: Amazon
+💻 I work with this tech: Next.js, Typescript, Tailwind, and Prisma
+🍎 I snack on: ☕
 
 Also, tell us what tools you use so we can automatically add you to the relevant channels!
 
