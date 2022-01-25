@@ -17,6 +17,7 @@ const LANGUAGES: LanguageObject = {
   tailwind: '913086567042674719',
   rust: '913086533387567165',
   swr: '915643752406720592',
+  mdx: '935666082100957234',
 };
 
 // Make sure to update this message ID when bot generates a new one

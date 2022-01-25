@@ -52,6 +52,8 @@ Also, tell us what tools you use so we can automatically add you to the relevant
 <:rust:913088096692748349> : Rust
 
 <:swr:770004547422650388> : SWR
+
+<:mdx:935667057121439805> : MDX
   `,
 ];
 
