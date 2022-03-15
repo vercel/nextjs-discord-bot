@@ -11,7 +11,7 @@ export type OnMessageHandler = (
   message: Message
 ) => Promise<void>;
 
-export type OnReactionAddHandler = (
+export type OnReactionHandler = (
   client: Client,
   reaction: MessageReaction,
   user: User
@@ -22,5 +22,6 @@ export type OnReactionAddHandler = (
 export type FeatureFile = {
   onStartup?: OnStartupHandler;
   onMessage?: OnMessageHandler;
-  onReactionAdd?: OnReactionAddHandler;
+  onReactionAdd?: OnReactionHandler;
+  onReactionRemove?: OnReactionHandler;
 };
