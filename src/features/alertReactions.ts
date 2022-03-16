@@ -1,5 +1,5 @@
 import { TextChannel } from 'discord.js';
-import { OnReactionAddHandler, OnStartupHandler } from '../types';
+import { OnReactionHandler, OnStartupHandler } from '../types';
 import { isStaff } from '../utils';
 
 /**
@@ -31,7 +31,7 @@ export const onStartup: OnStartupHandler = async (client) => {
   isEnabled = true;
 };
 
-export const onReactionAdd: OnReactionAddHandler = async (client, reaction) => {
+export const onReactionAdd: OnReactionHandler = async (client, reaction) => {
   if (!isEnabled || reaction.emoji.toString() !== TRIGGER_EMOJI) return;
 
   const { message } = reaction;

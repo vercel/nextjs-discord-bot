@@ -7,7 +7,7 @@ import { FeatureFile } from './types';
 dotenv.config();
 
 const INTRO_CHANNEL_ID = '766393115044216854';
-const VERIFIED_ROLE = '930202099264938084'
+const VERIFIED_ROLE = '930202099264938084';
 
 if (!process.env.DISCORD_BOT_TOKEN) {
   throw new Error('No bot token found!');
@@ -44,9 +44,9 @@ client.on('messageCreate', (message) => {
 
   // if user types into the intros channel, give them the verified role
   if (message.channel.id == INTRO_CHANNEL_ID) {
-      message.member?.roles
+    message.member?.roles
       .add(VERIFIED_ROLE)
-      .catch((err) => console.log(err.message, "Verify"));
+      .catch((err) => console.log(err.message, 'Verify'));
   }
 
   features.forEach((f) => f.onMessage?.(client, message));
@@ -80,6 +80,39 @@ client.on('messageReactionAdd', async (reaction, user) => {
     }
   } else {
     features.forEach((f) => f.onReactionAdd?.(client, reaction, user as User));
+  }
+});
+
+client.on('messageReactionRemove', async (reaction, user) => {
+  if (user.partial) {
+    try {
+      await user.fetch();
+    } catch (error) {
+      console.log('Error while trying to fetch an user', error);
+    }
+  }
+
+  if (reaction.message.partial) {
+    try {
+      await reaction.message.fetch();
+    } catch (error) {
+      console.log('Error while trying to fetch a reaction message', error);
+    }
+  }
+
+  if (reaction.partial) {
+    try {
+      const fetchedReaction = await reaction.fetch();
+      features.forEach((f) =>
+        f.onReactionRemove?.(client, fetchedReaction, user as User)
+      );
+    } catch (error) {
+      console.log('Error while trying to fetch a reaction', error);
+    }
+  } else {
+    features.forEach((f) =>
+      f.onReactionRemove?.(client, reaction, user as User)
+    );
   }
 });
 
