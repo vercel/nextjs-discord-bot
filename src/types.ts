@@ -1,5 +1,11 @@
-import { Client, Message, MessageReaction, User } from 'discord.js';
-
+import {
+  Client,
+  Message,
+  MessageReaction,
+  User,
+  CommandInteraction,
+} from 'discord.js';
+import { SlashCommandBuilder } from '@discordjs/builders';
 /* --------------------
  * Feature handlers
  */
@@ -24,4 +30,9 @@ export type FeatureFile = {
   onMessage?: OnMessageHandler;
   onReactionAdd?: OnReactionHandler;
   onReactionRemove?: OnReactionHandler;
+};
+
+export type CommandFile = {
+  command: SlashCommandBuilder;
+  execute: (message: CommandInteraction) => Promise<void>;
 };
