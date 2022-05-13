@@ -1,0 +1,4 @@
+{
+  "Static Files": "Nextjs can server static files like images, under a folder called `public` in the root directory. Files under the `public` folder can then be referenced in the code starting from the base url `(/)`\nStatic Files can't be access in api routes with base url.[Read More](https://nextjs.org/docs/basic-features/static-file-serving)",
+  "Router Query": "My `router.query`is Empty\nThe `router.query` is an object that contains the query parameters passed in the url.\n You can use `router.isReady` to check if the router query is ready to be used.\n Code Example: ```js\n import { useEffect } from \"react\";\nimport { useRouter } from \"next/router\";\n export default function App(){\nconst {isReady,query} = useRouter();\nuseEffect(() => {},[isReady]);\nreturn <div>{JSON.stringify(query)}</div>;\n}```"
+}
