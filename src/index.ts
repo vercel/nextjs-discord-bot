@@ -79,10 +79,11 @@ client.on('interactionCreate', async (interaction) => {
   const command = commands.find(
     (c) => c.command.name === interaction.commandName
   );
-  if (!command) {
+  if (command === undefined) {
     await interaction.reply({ content: 'Command not found' });
   }
   try {
+    // @eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     await command!.execute(interaction);
   } catch (err) {
     console.log(err);
