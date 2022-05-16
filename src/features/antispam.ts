@@ -30,7 +30,12 @@ export const onMessage: OnMessageHandler = async (client, message) => {
 
   const emojisCount = message.content.match(emojiRegex)?.length ?? 0;
 
-  if (emojisCount > MAX_EMOJI_COUNT) {
+  if (
+    emojisCount >
+    (message.channelId === '766393115044216854'
+      ? MAX_EMOJI_COUNT * 5
+      : MAX_EMOJI_COUNT)
+  ) {
     await message.author.send(dmMessage);
     await logAndDelete(client, message, 'Emoji spam');
     return;
