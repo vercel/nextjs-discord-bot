@@ -9,6 +9,7 @@ import { isStaff, logAndDelete } from '../utils';
 
 const MAX_EMOJI_COUNT = 8; // Flags are two symbols so 8 max emojis = max of 4 flags
 const ROLES_WHITELIST = ['partner']; // Allow partners to go above the emojis limit
+const INTRODUCTIONS_CHANNEL_ID = '766393115044216854';
 
 const emojiRegex = /\p{Emoji_Presentation}/gu;
 const spamKeywords = ['discord', 'nitro', 'steam', 'free', 'gift'];
@@ -30,7 +31,12 @@ export const onMessage: OnMessageHandler = async (client, message) => {
 
   const emojisCount = message.content.match(emojiRegex)?.length ?? 0;
 
-  if (emojisCount > MAX_EMOJI_COUNT) {
+  if (
+    emojisCount >
+    (message.channelId === INTRODUCTIONS_CHANNEL_ID
+      ? MAX_EMOJI_COUNT * 5
+      : MAX_EMOJI_COUNT)
+  ) {
     await message.author.send(dmMessage);
     await logAndDelete(client, message, 'Emoji spam');
     return;
