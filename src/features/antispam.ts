@@ -7,7 +7,7 @@ import { isStaff, logAndDelete } from '../utils';
  * If a message has too many emojis or contains certain keywords, the bot will log the message and delete it
  */
 
-const MAX_EMOJI_COUNT = 8; // Flags are two symbols so 8 max emojis = max of 4 flags
+const MAX_EMOJI_COUNT = 16; // Flags are two symbols so 16 max emojis = max of 8 flags
 const ROLES_WHITELIST = ['partner']; // Allow partners to go above the emojis limit
 const INTRODUCTIONS_CHANNEL_ID = '766393115044216854';
 
