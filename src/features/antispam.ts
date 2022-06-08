@@ -38,7 +38,7 @@ export const onMessage: OnMessageHandler = async (client, message) => {
       : MAX_EMOJI_COUNT)
   ) {
     await message.author.send(dmMessage);
-    await logAndDelete(client, message, 'Emoji spam');
+    await logAndDelete(client, message, 'Too many emojis');
     return;
   }
 
