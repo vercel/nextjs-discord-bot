@@ -2,7 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import discord, { Intents, User } from 'discord.js';
-import { FeatureFile } from './types';
+import { CommandFile, FeatureFile } from './types';
+import { REST } from '@discordjs/rest';
+import { Routes } from 'discord-api-types/v10';
 
 dotenv.config();
 
@@ -11,6 +13,9 @@ const VERIFIED_ROLE = '930202099264938084';
 
 if (!process.env.DISCORD_BOT_TOKEN) {
   throw new Error('No bot token found!');
+}
+if (!process.env.CLIENT_ID) {
+  throw new Error('No client id found!');
 }
 
 const client = new discord.Client({
@@ -21,8 +26,9 @@ const client = new discord.Client({
   ],
   partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
-
+const rest = new REST().setToken(process.env.DISCORD_BOT_TOKEN);
 const features: FeatureFile[] = [];
+const commands: CommandFile[] = [];
 const featureFiles = fs
   .readdirSync(path.resolve(__dirname, './features'))
   // Look for files as TS (dev) or JS (built files)
@@ -34,9 +40,25 @@ for (const featureFile of featureFiles) {
   features.push(feature);
 }
 
+const commandFiles = fs
+  .readdirSync(path.resolve(__dirname, './commands'))
+  .filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
+
+for (const commandFile of commandFiles) {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const command = require(`./commands/${commandFile}`);
+  commands.push({
+    command: command.command.toJSON(),
+    execute: command.execute,
+  });
+}
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`);
   features.forEach((f) => f.onStartup?.(client));
+  rest.put(Routes.applicationCommands(process.env.CLIENT_ID as string), {
+    body: commands.map((cmd) => cmd.command),
+  });
 });
 
 client.on('messageCreate', (message) => {
@@ -50,6 +72,22 @@ client.on('messageCreate', (message) => {
   }
 
   features.forEach((f) => f.onMessage?.(client, message));
+});
+
+client.on('interactionCreate', async (interaction) => {
+  if (!interaction.isCommand()) return;
+  const command = commands.find(
+    (c) => c.command.name === interaction.commandName
+  );
+  if (command === undefined) {
+    await interaction.reply({ content: 'Command not found' });
+  }
+  try {
+    // @eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    await command!.execute(interaction);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 client.on('messageReactionAdd', async (reaction, user) => {
