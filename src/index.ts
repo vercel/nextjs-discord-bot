@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
-import discord, { Intents, User } from 'discord.js';
+import discord, { GatewayIntentBits, Partials, User } from 'discord.js';
 import { FeatureFile } from './types';
 
 dotenv.config();
@@ -15,11 +15,11 @@ if (!process.env.DISCORD_BOT_TOKEN) {
 
 const client = new discord.Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
   ],
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
 const features: FeatureFile[] = [];

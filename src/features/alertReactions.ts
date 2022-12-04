@@ -72,7 +72,7 @@ export const onReactionAdd: OnReactionHandler = async (client, reaction) => {
         color: 16098851,
         author: {
           name: messageAuthor.displayName,
-          iconURL: messageAuthor.user.displayAvatarURL(),
+          icon_url: messageAuthor.user.displayAvatarURL(),
         },
         fields: [
           {
