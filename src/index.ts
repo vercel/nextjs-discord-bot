@@ -1,8 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import dotenv from 'dotenv';
 import discord, { Events, GatewayIntentBits, Partials, User } from 'discord.js';
-dotenv.config();
+import './assert-env-vars';
 
 import { FeatureFile } from './types';
 import { isJsOrTsFile } from './utils';

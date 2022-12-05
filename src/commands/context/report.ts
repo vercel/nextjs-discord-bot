@@ -12,9 +12,6 @@ import { isStaff } from '../../utils';
  * Logs a message in the mod log channel. If a normal user uses the command it will ping the mods
  */
 
-const MOD_LOG_CHANNEL_ID =
-  process.env.MOD_LOG_CHANNEL_ID ?? '763149438951882792';
-
 // We will keep a memory cache of warned messages to avoid showing multiple warnings
 const warnedMessageIds: string[] = [];
 
@@ -44,11 +41,11 @@ export const command: ContextMenuCommand = {
       return;
     }
 
-    const channel = client.channels.cache.get(MOD_LOG_CHANNEL_ID);
+    const channel = client.channels.cache.get(process.env.MOD_LOG_CHANNEL_ID);
 
     if (!channel || !channel.isTextBased()) {
       console.error(
-        `No mod-log channel found (using the ID ${MOD_LOG_CHANNEL_ID})!`
+        `No mod-log channel found (using the ID ${process.env.MOD_LOG_CHANNEL_ID})!`
       );
 
       interaction.reply({

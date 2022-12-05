@@ -8,6 +8,7 @@
     "start": "node dist/index.js",
     "dev": "ts-node-dev src/index.ts",
     "dev:register-commands": "DEV=true ts-node ./src/register-commands.ts",
+    "register-commands": "ts-node ./src/register-commands.ts",
     "build": "tsc",
     "lint": "eslint src"
   },

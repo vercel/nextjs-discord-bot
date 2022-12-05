@@ -1,18 +1,9 @@
-import dotenv from 'dotenv';
 import { REST, Routes } from 'discord.js';
+import './assert-env-vars';
+
 import { allCommands } from './commands';
 
-dotenv.config();
-
 (async () => {
-  if (!process.env.DISCORD_BOT_TOKEN) {
-    throw new Error('No bot token found!');
-  }
-
-  if (!process.env.DISCORD_CLIENT_ID) {
-    throw new Error('DISCORD_CLIENT_ID is not set');
-  }
-
   const isDevRegister = process.env.DEV === 'true';
   const guildId = process.env.DEV_GUILD_ID;
 
