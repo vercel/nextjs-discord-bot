@@ -1,4 +1,11 @@
-import { Client, Message, MessageReaction, User } from 'discord.js';
+import {
+  Client,
+  ContextMenuCommandBuilder,
+  Message,
+  MessageContextMenuCommandInteraction,
+  MessageReaction,
+  User,
+} from 'discord.js';
 
 /* --------------------
  * Feature handlers
@@ -24,4 +31,13 @@ export type FeatureFile = {
   onMessage?: OnMessageHandler;
   onReactionAdd?: OnReactionHandler;
   onReactionRemove?: OnReactionHandler;
+};
+
+export type ContextMenuCommand = {
+  data: ContextMenuCommandBuilder;
+  execute: (interaction: MessageContextMenuCommandInteraction) => void;
+};
+
+export type ContextMenuCommandFile = {
+  command: ContextMenuCommand;
 };

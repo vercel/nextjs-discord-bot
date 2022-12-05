@@ -13,6 +13,9 @@ export const isStaff = (member: GuildMember | null | undefined): boolean => {
   );
 };
 
+export const isJsOrTsFile = (file: string) =>
+  file.endsWith('.ts') || file.endsWith('.js');
+
 export const logAndDelete = async (
   client: Client,
   message: Message,

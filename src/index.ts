@@ -1,8 +1,10 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import dotenv from 'dotenv';
-import discord, { GatewayIntentBits, Partials, User } from 'discord.js';
+import discord, { Events, GatewayIntentBits, Partials, User } from 'discord.js';
 import { FeatureFile } from './types';
+import { isJsOrTsFile } from './utils';
+import { contextMenuCommands } from './commands';
 
 dotenv.config();
 
@@ -26,7 +28,7 @@ const features: FeatureFile[] = [];
 const featureFiles = fs
   .readdirSync(path.resolve(__dirname, './features'))
   // Look for files as TS (dev) or JS (built files)
-  .filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
+  .filter(isJsOrTsFile);
 
 for (const featureFile of featureFiles) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -37,6 +39,12 @@ for (const featureFile of featureFiles) {
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`);
   features.forEach((f) => f.onStartup?.(client));
+});
+
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (interaction.isMessageContextMenuCommand()) {
+    contextMenuCommands.forEach((c) => c.execute(interaction));
+  }
 });
 
 client.on('messageCreate', (message) => {
