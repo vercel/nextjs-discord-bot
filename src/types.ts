@@ -1,9 +1,11 @@
 import {
+  ChatInputCommandInteraction,
   Client,
   ContextMenuCommandBuilder,
   Message,
   MessageContextMenuCommandInteraction,
   MessageReaction,
+  SlashCommandBuilder,
   User,
 } from 'discord.js';
 
@@ -33,9 +35,20 @@ export type FeatureFile = {
   onReactionRemove?: OnReactionHandler;
 };
 
+export type SlashCommand = {
+  data: Omit<SlashCommandBuilder, 'addSubcommand' | 'addSubcommandGroup'>;
+  execute: (interaction: ChatInputCommandInteraction) => void | Promise<void>;
+};
+
+export type SlashCommandFile = {
+  command: SlashCommand;
+};
+
 export type ContextMenuCommand = {
   data: ContextMenuCommandBuilder;
-  execute: (interaction: MessageContextMenuCommandInteraction) => void;
+  execute: (
+    interaction: MessageContextMenuCommandInteraction
+  ) => void | Promise<void>;
 };
 
 export type ContextMenuCommandFile = {

@@ -6,7 +6,7 @@ dotenv.config();
 
 import { FeatureFile } from './types';
 import { isJsOrTsFile } from './utils';
-import { contextMenuCommands } from './commands';
+import { slashCommands, contextMenuCommands } from './commands';
 
 const INTRO_CHANNEL_ID = '766393115044216854';
 const VERIFIED_ROLE = '930202099264938084';
@@ -42,8 +42,16 @@ client.on('ready', () => {
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
+  if (interaction.isChatInputCommand()) {
+    slashCommands
+      .find((c) => c.data.name === interaction.commandName)
+      ?.execute(interaction);
+  }
+
   if (interaction.isMessageContextMenuCommand()) {
-    contextMenuCommands.forEach((c) => c.execute(interaction));
+    contextMenuCommands
+      .find((c) => c.data.name === interaction.commandName)
+      ?.execute(interaction);
   }
 });
 
