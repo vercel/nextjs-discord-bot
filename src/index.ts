@@ -2,11 +2,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import discord, { Events, GatewayIntentBits, Partials, User } from 'discord.js';
+dotenv.config();
+
 import { FeatureFile } from './types';
 import { isJsOrTsFile } from './utils';
 import { contextMenuCommands } from './commands';
-
-dotenv.config();
 
 const INTRO_CHANNEL_ID = '766393115044216854';
 const VERIFIED_ROLE = '930202099264938084';
