@@ -1,6 +1,6 @@
 # Next.js Discord Bot
 
-The source code of the Discord bot for the official [Next.js discord](https://nextjs.org/discord).
+The source code of the Discord bot for the official [Next.js Discord](https://nextjs.org/discord).
 
 ## Features
 

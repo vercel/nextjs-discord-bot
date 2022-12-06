@@ -1,10 +1,11 @@
-import fs from 'fs';
-import path from 'path';
-import dotenv from 'dotenv';
-import discord, { Intents, User } from 'discord.js';
-import { FeatureFile } from './types';
+import fs from 'node:fs';
+import path from 'node:path';
+import discord, { Events, GatewayIntentBits, Partials, User } from 'discord.js';
+import './assert-env-vars';
 
-dotenv.config();
+import { FeatureFile } from './types';
+import { isJsOrTsFile } from './utils';
+import { slashCommands, contextMenuCommands } from './commands';
 
 const INTRO_CHANNEL_ID = '766393115044216854';
 const VERIFIED_ROLE = '930202099264938084';
@@ -15,18 +16,18 @@ if (!process.env.DISCORD_BOT_TOKEN) {
 
 const client = new discord.Client({
   intents: [
-    Intents.FLAGS.GUILDS,
-    Intents.FLAGS.GUILD_MESSAGES,
-    Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMessageReactions,
   ],
-  partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 
 const features: FeatureFile[] = [];
 const featureFiles = fs
   .readdirSync(path.resolve(__dirname, './features'))
   // Look for files as TS (dev) or JS (built files)
-  .filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
+  .filter(isJsOrTsFile);
 
 for (const featureFile of featureFiles) {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -37,6 +38,20 @@ for (const featureFile of featureFiles) {
 client.on('ready', () => {
   console.log(`Logged in as ${client.user?.tag}!`);
   features.forEach((f) => f.onStartup?.(client));
+});
+
+client.on(Events.InteractionCreate, async (interaction) => {
+  if (interaction.isChatInputCommand()) {
+    slashCommands
+      .find((c) => c.data.name === interaction.commandName)
+      ?.execute(interaction);
+  }
+
+  if (interaction.isMessageContextMenuCommand()) {
+    contextMenuCommands
+      .find((c) => c.data.name === interaction.commandName)
+      ?.execute(interaction);
+  }
 });
 
 client.on('messageCreate', (message) => {
