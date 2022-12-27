@@ -54,3 +54,9 @@ export type ContextMenuCommand = {
 export type ContextMenuCommandFile = {
   command: ContextMenuCommand;
 };
+
+export type PendingAnswer = {
+  threadId: string;
+  messageId: string;
+  response: string;
+}
