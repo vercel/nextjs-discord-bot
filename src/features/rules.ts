@@ -11,6 +11,12 @@ import { OnStartupHandler } from '../types';
 
 const RULES_CHANNEL_ID = process.env.RULES_CHANNEL_ID ?? '752553802359505020';
 const INTRO_CHANNEL_ID = '766393115044216854';
+const HELP_CHANNEL_ID = '1007476603422527558';
+const OFFTOPIC_CHANNEL_ID = '766433464055496744';
+const SHOWCASE_CHANNEL_ID = '771729272074534922';
+const KUDOS_CHANNEL_ID = '911305422307225682';
+const GENERAL_CHANNEL_ID = '752647196419031042';
+
 const FEEDBACK_CHANNEL_ID = '843997308616966145';
 
 const RULES_MESSAGES = [
@@ -24,6 +30,13 @@ const RULES_MESSAGES = [
 🙋 Introduce yourself in the <#${INTRO_CHANNEL_ID}> channel, we'd love to learn more about you and what you're working on!
 
 ✨ Customize your profile in <id:customize> by adding your own name color or custom roles
+
+🔍 **Here's a quick breakdown of our most popular channels:**
+<#${GENERAL_CHANNEL_ID}> — General chat about Next.js
+<#${HELP_CHANNEL_ID}> — Ask for help with Next.js
+<#${OFFTOPIC_CHANNEL_ID}> — Anything else you want to talk about
+<#${SHOWCASE_CHANNEL_ID}> — Show off your Next.js projects
+<#${KUDOS_CHANNEL_ID}> — Shout out people who helped you out
 
 📜 **Server Rules**
 
