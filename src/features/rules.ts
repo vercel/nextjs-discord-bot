@@ -16,7 +16,7 @@ const OFFTOPIC_CHANNEL_ID = '766433464055496744';
 const SHOWCASE_CHANNEL_ID = '771729272074534922';
 const KUDOS_CHANNEL_ID = '911305422307225682';
 const GENERAL_CHANNEL_ID = '752647196419031042';
-
+const JOBS_CHANNEL_ID = '910564441119150100';
 const FEEDBACK_CHANNEL_ID = '843997308616966145';
 
 const RULES_MESSAGES = [
@@ -32,6 +32,7 @@ const RULES_MESSAGES = [
 ✨ Customize your profile in <id:customize> by adding your own name color or custom roles
 
 🔍 **Here's a quick breakdown of our most popular channels:**
+
 <#${GENERAL_CHANNEL_ID}> — General chat about Next.js
 <#${HELP_CHANNEL_ID}> — Ask for help with Next.js
 <#${OFFTOPIC_CHANNEL_ID}> — Anything else you want to talk about
@@ -42,15 +43,27 @@ const RULES_MESSAGES = [
 
 1. Treat everyone with respect. No NFSW content or spam
 2. No self-promotion (server invites, advertisements, etc.) outside the correct channels. This includes DMing fellow members
-3. Job posts in this server are not allowed, refer to #jobs if you want to hire someone or are looking for a job
+3. Job posts in this server are not allowed, refer to <#${JOBS_CHANNEL_ID}> if you want to hire someone or are looking for a job
 4. Do not DM members randomly
 5. Do not mention (\`@ping\`) people not in the conversation
 6. Do not use an avatar, nickname, or profile that breaks any of the rules
 7. Moderators will delete messages posted on the wrong channel, please read the channel descriptions before posting
-8. Bumping posts in #help-forum is allowed to avoid having it going down the list if you still need help. Do not do it more than once a day
+8. Bumping posts in <#${HELP_CHANNEL_ID}> is allowed to avoid having it going down the list if you still need help. Do not do it more than once a day
 
 If you see something against the rules or something that makes you feel unsafe, let the staff know. We want this server to be a welcoming space!
 We are always looking to improve the server. Feel free to share your ideas or opinions in <#${FEEDBACK_CHANNEL_ID}>
+`,
+  `
+‎
+✍️ **Tips to get help faster**
+
+1. Don't ask to ask, just ask: <https://dontasktoask.com>
+2. If you are facing an error, share the full error message and what you think might be causing it
+3. Always try to add this to your questions when applicable: "What are you expecting to happen?", "What is happening instead?", "What have you tried?"
+4. Include the relevant dependencies you are working with. \`next info\` will give you a list to get you started
+5. Share the project or a minimal reproduction of the issue, this allows people to investigate better the problem
+
+More tips: <https://stackoverflow.com/help/how-to-ask>
 `,
 ];
 
